@@ -84,6 +84,13 @@ module Utils
         for i in (0...6); args[i] = args[i].to_f end
         puts "With arguments: "  + args.to_s if $DEBUGGING
         Draw.box(args[0], args[1], args[2], args[3], args[4], args[5])
+      when "sphere"
+        args = file.gets.chomp.split(" ")
+        for i in (0...4); args[i] = args[i].to_f end
+        puts "With arguments: "  + args.to_s if $DEBUGGING
+        Draw.sphere(args[0], args[1], args[2], args[3])
+      when "clear"
+        $EDGE_MAT = Matrix.new(4, 0)
       when "ident"
         $TRAN_MAT = MatrixUtils.identity(4)
       when "scale"

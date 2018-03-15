@@ -151,6 +151,41 @@ module Draw
     add_edge(x + width, y - height, z, x + width, y - height, z - depth)
   end
 
+  # Connects a matrix of points in a sphere-like fashion (requires gen_sphere())
+  def self.sphere(cx, cy, cz, r)
+    points = gen_sphere(cx, cy, cz, r)
+    for i in (0...points.cols)
+      p = points.get_col(i) # one single point
+      add_edge(p[0], p[1], p[2], p[0], p[1], p[2])
+    end
+  end
+
+  # Returns a matrix of all points on surface of a sphere (helper for sphere())
+  def self.gen_sphere(cx, cy, cz, r)
+    ret = Matrix.new(3, 0)
+    phi = 0
+    while phi < $TAU
+      theta = 0
+      while theta < PI
+        x = r*cos(theta) + cx
+        y = r*sin(theta)*cos(phi) + cy
+        z = r*sin(theta)*sin(phi) + cz
+        ret.add_col([x, y, z])
+        theta += $dt
+      end
+      phi += $dt
+    end
+    return ret
+  end
+
+  # Connects a matrix of points in a torus-like fashion (requires gen_torus())
+  def self.torus()
+  end
+
+  # Returns a matrix of all points on surface of a torus (helper for torus())
+  def self.gen_torus()
+  end
+
   # Helper for add_edge
   def self.add_point(x, y, z)
     $EDGE_MAT.add_col([x, y, z, 1])

@@ -16,7 +16,7 @@ $DRAW_COLOR = [200, 200, 200]
 $INFILE = "script"
 $OUTFILE = "image.ppm"
 $TEMPFILE = "temmmmp.ppm" # Used as temp storage for displaying
-$dt = 0.008 # The amount that the parametric t is incremented by on each loop
+$dt = 0.05 # The amount that the parametric t is incremented by on each loop
 
 # Static
 $GRID = Utils.create_grid()
