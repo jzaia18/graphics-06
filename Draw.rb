@@ -19,7 +19,6 @@ module Draw
     dx = x1-x0
     x = x0
     y = y0
-    #d = -1 * dx
 
     ## Begin actual algorithm:
     if dy >= 0 #if the line is in octants I or II
@@ -196,9 +195,9 @@ module Draw
 
       ## BROKEN!
       while theta < $TAU
-        x = cos(theta) * r1*cos(theta + r2) + cx
-        y = r1*sin(theta) + cy
-        z = -1*sin(theta) * r1*cos(theta + r2) + cz
+        x = r1 * cos(theta) + cx
+        y = r1 * sin(theta) + cy #done
+        z = cz
         ret.add_col([x, y, z])
         theta += $dt
       end
