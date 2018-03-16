@@ -179,11 +179,32 @@ module Draw
   end
 
   # Connects a matrix of points in a torus-like fashion (requires gen_torus())
-  def self.torus()
+  def self.torus(cx, cy, cz, r1, r2)
+    points = gen_torus(cx, cy, cz, r1, r2)
+    for i in (0...points.cols)
+      p = points.get_col(i) # one single point
+      add_edge(p[0], p[1], p[2], p[0], p[1], p[2])
+    end
   end
 
   # Returns a matrix of all points on surface of a torus (helper for torus())
-  def self.gen_torus()
+  def self.gen_torus(cx, cy, cz, r1, r2)
+    ret = Matrix.new(3, 0)
+    phi = 0
+    while phi < $TAU
+      theta = 0
+
+      ## BROKEN!
+      while theta < $TAU
+        x = cos(theta) * r1*cos(theta + r2) + cx
+        y = r1*sin(theta) + cy
+        z = -1*sin(theta) * r1*cos(theta + r2) + cz
+        ret.add_col([x, y, z])
+        theta += $dt
+      end
+      phi += $dt
+    end
+    return ret
   end
 
   # Helper for add_edge
