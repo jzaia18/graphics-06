@@ -192,12 +192,10 @@ module Draw
     phi = 0
     while phi < $TAU
       theta = 0
-
-      ## BROKEN!
       while theta < $TAU
-        x = r1 * cos(theta) + cx
-        y = r1 * sin(theta) + cy #done
-        z = cz
+        x = (r1 * cos(theta) + r2) * cos(phi) + cx
+        y = r1 * sin(theta) + cy
+        z = -1 * (r1 * cos(theta) + r2) * sin(phi) + cz
         ret.add_col([x, y, z])
         theta += $dt
       end

@@ -16,6 +16,7 @@ module Utils
 
   ## Write GRID to OUTFILE
   def self.write_out(file: $OUTFILE, edgemat: $EDGE_MAT)
+    puts "Writing out to #{file}" if $DEBUGGING
     extension = file.dup #filename with any extension
     file[file.index('.')..-1] = '.ppm'
     $GRID = create_grid()

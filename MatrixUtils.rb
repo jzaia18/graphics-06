@@ -35,25 +35,43 @@ module MatrixUtils
   end
 
   # Adds 2 matricies and modifies first input
-  def self.add(m1, m2)
+  def self.add(m1, m2, modify_second: true)
     raise "Cannot add these matricies due to their dimensions" if m1.rows != m2.rows || m1.cols != m2.cols
+    ret = Matrix.new(m1.rows, m1.cols)
     for r in (0...m1.rows)
       for c in (0...m1.cols)
-        m1.set(r, c, m1.get(r, c) + m2.get(r, c))
+        ret.set(r, c, m1.get(r, c) + m2.get(r, c))
       end
     end
-    return m1
+
+    if modify_second
+      for r in (0...m2.rows)
+        for c in (0...m2.cols)
+          m1.set(r, c, ret.get(r, c))
+        end
+      end
+    end
+    return ret
   end
 
   # Subtracts 2 matricies and modifies first input
-  def self.subtract(m1, m2)
+  def self.subtract(m1, m2, modify_second: true)
     raise "Cannot subtract these matricies due to their dimensions" if m1.rows != m2.rows || m1.cols != m2.cols
+    ret = Matrix.new(m1.rows, m1.cols)
     for r in (0...m1.rows)
       for c in (0...m1.cols)
-        m1.set(r, c, m1.get(r, c) - m2.get(r, c))
+        ret.set(r, c, m1.get(r, c) - m2.get(r, c))
       end
     end
-    return m1
+
+    if modify_second
+      for r in (0...m2.rows)
+        for c in (0...m2.cols)
+          m1.set(r, c, ret.get(r, c))
+        end
+      end
+    end
+    return ret
   end
 
   def self.dilation(sx, sy, sz)
